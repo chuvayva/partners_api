@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: Partners API
+  version: 0.0.0
+tags: []
+paths:
+  /partners/search:
+    post:
+      operationId: searchPartners
+      summary: Search for partners based on filters and pagination
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Partner'
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          current_page:
+                            type: integer
+                            format: int32
+                          per_page:
+                            type: integer
+                            format: int32
+                          total_pages:
+                            type: integer
+                            format: int32
+                          total_records:
+                            type: integer
+                            format: int32
+                        required:
+                          - current_page
+                          - per_page
+                          - total_pages
+                          - total_records
+                    required:
+                      - pagination
+                required:
+                  - data
+                  - meta
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filter:
+                  $ref: '#/components/schemas/Filter'
+                page:
+                  $ref: '#/components/schemas/Page'
+  /partners/{id}:
+    get:
+      operationId: getPartner
+      summary: Retrieve partner details by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Partner'
+                  included:
+                    type: array
+                    items:
+                      anyOf:
+                        - $ref: '#/components/schemas/Address'
+                        - $ref: '#/components/schemas/FlooringMaterial'
+                required:
+                  - data
+                  - included
+components:
+  schemas:
+    Address:
+      type: object
+      required:
+        - id
+        - location
+      properties:
+        id:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+    Filter:
+      type: object
+      properties:
+        flooring_materials:
+          type: array
+          items:
+            type: integer
+            format: int64
+        location:
+          $ref: '#/components/schemas/Location'
+    FlooringMaterial:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Location:
+      type: object
+      required:
+        - latitude
+        - longitude
+      properties:
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+    Page:
+      type: object
+      properties:
+        number:
+          type: integer
+          format: int32
+          minimum: 1
+        size:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+    Partner:
+      type: object
+      required:
+        - id
+        - full_name
+        - operating_radius
+        - rating
+      properties:
+        id:
+          type: string
+        full_name:
+          type: string
+        operating_radius:
+          type: number
+        rating:
+          type: string
+        distance:
+          type: number

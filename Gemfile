@@ -1,7 +1,11 @@
 source "https://rubygems.org"
 
 ruby "3.4.1"
+ruby "3.4.1"
 gem "rails", "~> 8.0.1"
+
+gem "pg"
+gem "activerecord-postgis-adapter"
 
 gem "pg"
 gem "activerecord-postgis-adapter"
@@ -15,6 +19,8 @@ gem "dry-types"
 gem "ransack"
 gem "kaminari"
 
+gem "rswag-ui"
+gem "openapi_first"
 gem "jsonapi-serializer"
 
 group :development, :test do
@@ -23,6 +29,10 @@ group :development, :test do
   gem "brakeman", require: false
 
   gem "rubocop-rails-omakase", require: false
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "rspec-json_expectations"
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"

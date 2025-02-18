@@ -1,5 +1,6 @@
 install:
 	docker compose build
+	docker compose run --rm app sh -c "cd openapi && npm install"
 	make run-app rake db:prepare
 	make run-app rake db:test:prepare
 

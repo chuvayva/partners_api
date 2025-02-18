@@ -1,0 +1,13 @@
+{
+  "name": "partner_api",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "compile": "tsp compile . && cp ./tsp-output/@typespec/openapi3/openapi.yaml ../public && rm -rf ./tsp-output"
+  },
+  "devDependencies": {
+    "@typespec/compiler": "^0.65.2",
+    "@typespec/openapi3": "^0.65.0"
+  },
+  "private": true
+}

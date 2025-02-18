@@ -1,6 +1,8 @@
 require_relative "boot"
 
 require "rails/all"
+require "openapi_first"
+require_relative "../app/middleware/skip_middleware_by_path"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -28,5 +30,10 @@ module PartnersApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.use SkipMiddlewareByPath, OpenapiFirst::Middlewares::RequestValidation,
+      spec: "public/openapi.yaml",
+      error_response: :jsonapi,
+      except: [ %r{^/api-docs}, %r{^/$} ]
   end
 end
