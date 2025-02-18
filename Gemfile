@@ -10,6 +10,10 @@ gem "bootsnap", require: false
 gem "ostruct"
 
 gem "rack-attack"
+gem "dry-struct"
+gem "dry-types"
+gem "ransack"
+gem "kaminari"
 
 gem "jsonapi-serializer"
 
