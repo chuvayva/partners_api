@@ -70,4 +70,6 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
+  config.include JsonHelpers
 end
