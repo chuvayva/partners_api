@@ -5,7 +5,6 @@ carpet = FlooringMaterial.find_or_create_by!(name: "Carpet")
 tiles = FlooringMaterial.find_or_create_by!(name: "Tiles")
 wood = FlooringMaterial.find_or_create_by!(name: "Wood")
 
-# Helper function to create addresses
 def create_address(latitude, longitude)
   geo_factory = RGeo::Geographic.spherical_factory(srid: 4326)
   Address.create!(location: geo_factory.point(longitude, latitude))
@@ -50,4 +49,4 @@ end
     operating_radius: 5_000 }
 ].each { create_partner(**_1) }
 
-puts "✅ Seeded 9 partners"
+puts "✅ Seeded 8 partners"

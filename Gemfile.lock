@@ -56,6 +56,9 @@ GEM
     activerecord-postgis-adapter (11.0.0)
       activerecord (~> 8.0.0)
       rgeo-activerecord (~> 8.0.0)
+    activerecord-postgis-adapter (11.0.0)
+      activerecord (~> 8.0.0)
+      rgeo-activerecord (~> 8.0.0)
     activestorage (8.0.1)
       actionpack (= 8.0.1)
       activejob (= 8.0.1)
@@ -92,7 +95,30 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.6.0)
+    diff-lcs (1.6.0)
     drb (2.2.1)
+    dry-core (1.1.0)
+      concurrent-ruby (~> 1.0)
+      logger
+      zeitwerk (~> 2.6)
+    dry-inflector (1.2.0)
+    dry-logic (1.6.0)
+      bigdecimal
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.1)
+      zeitwerk (~> 2.6)
+    dry-struct (1.7.1)
+      dry-core (~> 1.1)
+      dry-types (~> 1.8, >= 1.8.2)
+      ice_nine (~> 0.11)
+      zeitwerk (~> 2.6)
+    dry-types (1.8.2)
+      bigdecimal (~> 3.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 1.0)
+      dry-inflector (~> 1.0)
+      dry-logic (~> 1.4)
+      zeitwerk (~> 2.6)
     dry-core (1.1.0)
       concurrent-ruby (~> 1.0)
       logger
@@ -123,10 +149,19 @@ GEM
       railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
+    factory_bot (6.5.1)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hana (1.3.7)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
     ice_nine (0.11.2)
     io-console (0.8.0)
     irb (1.15.1)
@@ -134,8 +169,25 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.10.1)
+    json_schemer (2.4.0)
+      bigdecimal
+      hana (~> 1.3)
+      regexp_parser (~> 2.0)
+      simpleidn (~> 0.2)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -189,11 +241,19 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.2-x86_64-linux-musl)
       racc (~> 1.4)
+    openapi_first (2.3.0)
+      hana (~> 1.3)
+      json_schemer (>= 2.1, < 3.0)
+      openapi_parameters (>= 0.3.3, < 2.0)
+      rack (>= 2.2, < 4.0)
+    openapi_parameters (0.4.0)
+      rack (>= 2.2)
     ostruct (0.6.1)
     parallel (1.26.3)
     parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
+    pg (1.5.9)
     pg (1.5.9)
     pp (0.6.2)
       prettyprint
@@ -205,6 +265,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.10)
+    rack-attack (6.7.0)
+      rack (>= 1.0, < 4)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-session (2.1.0)
@@ -249,6 +311,10 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
+    ransack (4.3.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.12.0)
       psych (>= 4.0.0)
     regexp_parser (2.10.0)
@@ -276,6 +342,9 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.2)
+    rswag-ui (2.16.0)
+      actionpack (>= 5.2, < 8.1)
+      railties (>= 5.2, < 8.1)
     rubocop (1.72.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -307,6 +376,7 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    simpleidn (0.2.3)
     stringio (3.1.3)
     thor (1.3.2)
     timeout (0.4.3)
@@ -337,24 +407,34 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter
+  activerecord-postgis-adapter
   bootsnap
   brakeman
   debug
+  dry-struct
+  dry-types
   dry-struct
   dry-types
   factory_bot_rails
   faker
   jsonapi-serializer
   kaminari
+  openapi_first
   ostruct
   pg
   puma (>= 5.0)
   rack-attack
+  rack-attack
   rails (~> 8.0.1)
+  ransack
   ransack
   rspec-json_expectations
   rspec-rails
+  rswag-ui
   rubocop-rails-omakase
+
+RUBY VERSION
+   ruby 3.4.1p0
 
 RUBY VERSION
    ruby 3.4.1p0

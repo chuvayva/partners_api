@@ -77,4 +77,20 @@ RSpec.describe "POST /partners/search", type: :request do
       expect(response.body).to include_json(search_partners_json([ partner_5, partner_6 ], **expected_pagination))
     end
   end
+
+  context 'with invalid location filter' do
+    let(:filter) { { location: { latitude: 90 } } }
+
+    it "returns bad request" do
+      post_search
+
+      expect(response).to have_http_status(:bad_request)
+      expect(response.body).to include_json(
+        errors: [ {
+          status: "400",
+          source: be
+        } ]
+      )
+    end
+  end
 end

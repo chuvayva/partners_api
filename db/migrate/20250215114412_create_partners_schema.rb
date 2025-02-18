@@ -26,7 +26,6 @@ class CreatePartnersSchema < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    # TODO: add id and partner
     create_table :flooring_materials_partners, id: false do |t|
       t.references :partner, null: false, foreign_key: true
       t.references :flooring_material, null: false, foreign_key: true
