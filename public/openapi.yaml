@@ -20,7 +20,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Partner'
+                      $ref: '#/components/schemas/PartnerResource'
                   meta:
                     type: object
                     properties:
@@ -79,28 +79,36 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: '#/components/schemas/Partner'
+                    $ref: '#/components/schemas/PartnerResource'
                   included:
                     type: array
                     items:
                       anyOf:
-                        - $ref: '#/components/schemas/Address'
-                        - $ref: '#/components/schemas/FlooringMaterial'
+                        - $ref: '#/components/schemas/AddressResource'
+                        - $ref: '#/components/schemas/FlooringMaterialResource'
                 required:
                   - data
                   - included
 components:
   schemas:
-    Address:
+    AddressResource:
       type: object
       required:
+        - type
         - id
-        - location
+        - attributes
       properties:
+        type:
+          type: string
         id:
           type: string
-        location:
-          $ref: '#/components/schemas/Location'
+        attributes:
+          type: object
+          properties:
+            location:
+              $ref: '#/components/schemas/Location'
+          required:
+            - location
     Filter:
       type: object
       properties:
@@ -111,16 +119,24 @@ components:
             format: int64
         location:
           $ref: '#/components/schemas/Location'
-    FlooringMaterial:
+    FlooringMaterialResource:
       type: object
       required:
+        - type
         - id
-        - name
+        - attributes
       properties:
+        type:
+          type: string
         id:
           type: string
-        name:
-          type: string
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+          required:
+            - name
     Location:
       type: object
       required:
@@ -147,16 +163,13 @@ components:
           format: int32
           minimum: 1
           maximum: 100
-    Partner:
+    PartnerAttributes:
       type: object
       required:
-        - id
         - full_name
         - operating_radius
         - rating
       properties:
-        id:
-          type: string
         full_name:
           type: string
         operating_radius:
@@ -165,3 +178,56 @@ components:
           type: string
         distance:
           type: number
+    PartnerResource:
+      type: object
+      required:
+        - type
+        - id
+        - attributes
+        - links
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/PartnerAttributes'
+        relationships:
+          type: object
+          properties:
+            address:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/ResourceIdentifier'
+              required:
+                - data
+            flooring_materials:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourceIdentifier'
+              required:
+                - data
+          required:
+            - address
+            - flooring_materials
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+          required:
+            - self
+    ResourceIdentifier:
+      type: object
+      required:
+        - type
+        - id
+      properties:
+        type:
+          type: string
+        id:
+          type: string

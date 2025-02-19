@@ -15,7 +15,7 @@ namespace PartnerAPI {
       page?: Page;
     },
   ): {
-    data: Partner[];
+    data: PartnerResource[];
     meta: {
       pagination: {
         current_page: int32;
@@ -30,26 +30,44 @@ namespace PartnerAPI {
   @route("/partners/{id}")
   @summary("Retrieve partner details by ID")
   op getPartner(@path id: string): {
-    data: Partner;
-    included: (Address | FlooringMaterial)[];
+    data: PartnerResource;
+    included: (AddressResource | FlooringMaterialResource)[];
   };
 
-  model Partner {
+  model PartnerResource {
+    type: string;
     id: string;
+    attributes: PartnerAttributes;
+    relationships?: {
+      address: { data: ResourceIdentifier };
+      flooring_materials: { data: ResourceIdentifier[] };
+    };
+    links: {
+      self: string;
+    };
+  }
+
+  model PartnerAttributes {
     full_name: string;
     operating_radius: float;
     rating: string;
     distance?: float;
   }
 
-  model Address {
+  model AddressResource {
+    type: string;
     id: string;
-    location: Location;
+    attributes: {
+      location: Location;
+    };
   }
 
-  model FlooringMaterial {
+  model FlooringMaterialResource {
+    type: string;
     id: string;
-    name: string;
+    attributes: {
+      name: string;
+    };
   }
 
   model Location {
@@ -64,7 +82,6 @@ namespace PartnerAPI {
 
   model Filter {
     flooring_materials?: int64[];
-
     location?: Location;
   }
 
@@ -75,5 +92,10 @@ namespace PartnerAPI {
     @minValue(1)
     @maxValue(100)
     size?: int32;
+  }
+
+  model ResourceIdentifier {
+    type: string;
+    id: string;
   }
 }
