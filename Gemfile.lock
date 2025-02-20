@@ -56,9 +56,6 @@ GEM
     activerecord-postgis-adapter (11.0.0)
       activerecord (~> 8.0.0)
       rgeo-activerecord (~> 8.0.0)
-    activerecord-postgis-adapter (11.0.0)
-      activerecord (~> 8.0.0)
-      rgeo-activerecord (~> 8.0.0)
     activestorage (8.0.1)
       actionpack (= 8.0.1)
       activejob (= 8.0.1)
@@ -95,30 +92,7 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.6.0)
-    diff-lcs (1.6.0)
     drb (2.2.1)
-    dry-core (1.1.0)
-      concurrent-ruby (~> 1.0)
-      logger
-      zeitwerk (~> 2.6)
-    dry-inflector (1.2.0)
-    dry-logic (1.6.0)
-      bigdecimal
-      concurrent-ruby (~> 1.0)
-      dry-core (~> 1.1)
-      zeitwerk (~> 2.6)
-    dry-struct (1.7.1)
-      dry-core (~> 1.1)
-      dry-types (~> 1.8, >= 1.8.2)
-      ice_nine (~> 0.11)
-      zeitwerk (~> 2.6)
-    dry-types (1.8.2)
-      bigdecimal (~> 3.0)
-      concurrent-ruby (~> 1.0)
-      dry-core (~> 1.0)
-      dry-inflector (~> 1.0)
-      dry-logic (~> 1.4)
-      zeitwerk (~> 2.6)
     dry-core (1.1.0)
       concurrent-ruby (~> 1.0)
       logger
@@ -149,19 +123,11 @@ GEM
       railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
-    factory_bot (6.5.1)
-      activesupport (>= 6.1.0)
-    factory_bot_rails (6.4.4)
-      factory_bot (~> 6.5)
-      railties (>= 5.0.0)
-    faker (3.5.1)
-      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hana (1.3.7)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    ice_nine (0.11.2)
     ice_nine (0.11.2)
     io-console (0.8.0)
     irb (1.15.1)
@@ -176,18 +142,6 @@ GEM
       simpleidn (~> 0.2)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
-    kaminari (1.2.2)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.2.2)
-      kaminari-activerecord (= 1.2.2)
-      kaminari-core (= 1.2.2)
-    kaminari-actionview (1.2.2)
-      actionview
-      kaminari-core (= 1.2.2)
-    kaminari-activerecord (1.2.2)
-      activerecord
-      kaminari-core (= 1.2.2)
-    kaminari-core (1.2.2)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -254,7 +208,6 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
-    pg (1.5.9)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -265,8 +218,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.10)
-    rack-attack (6.7.0)
-      rack (>= 1.0, < 4)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-session (2.1.0)
@@ -307,10 +258,6 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
-    ransack (4.3.0)
-      activerecord (>= 6.1.5)
-      activesupport (>= 6.1.5)
-      i18n
     ransack (4.3.0)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
@@ -407,12 +354,9 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter
-  activerecord-postgis-adapter
   bootsnap
   brakeman
   debug
-  dry-struct
-  dry-types
   dry-struct
   dry-types
   factory_bot_rails
@@ -424,17 +368,12 @@ DEPENDENCIES
   pg
   puma (>= 5.0)
   rack-attack
-  rack-attack
   rails (~> 8.0.1)
-  ransack
   ransack
   rspec-json_expectations
   rspec-rails
   rswag-ui
   rubocop-rails-omakase
-
-RUBY VERSION
-   ruby 3.4.1p0
 
 RUBY VERSION
    ruby 3.4.1p0
