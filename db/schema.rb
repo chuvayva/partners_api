@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_15_114412) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_20_070009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
@@ -40,11 +40,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_15_114412) do
   create_table "partners", force: :cascade do |t|
     t.string "full_name", null: false
     t.integer "operating_radius", null: false
-    t.geography "operating_area", limit: {srid: 4326, type: "st_polygon", geographic: true}, null: false
     t.decimal "rating", precision: 3, scale: 2, default: "0.0", null: false
     t.bigint "address_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.geometry "operating_area", limit: {srid: 4326, type: "geometry"}, null: false
     t.index ["address_id"], name: "index_partners_on_address_id"
     t.index ["operating_area"], name: "index_partners_on_operating_area", using: :gist
     t.index ["rating"], name: "index_partners_on_rating"
