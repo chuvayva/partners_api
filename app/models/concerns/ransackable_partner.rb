@@ -13,8 +13,15 @@ module RansackablePartner
 
   included do
     scope :in_operating_area, ->(latitude, longitude) {
-      where("ST_Intersects(partners.operating_area, ST_MakePoint(:longitude, :latitude)::geography)",
-            latitude: latitude, longitude: longitude)
+      where(<<~SQL.squish, latitude:, longitude:)
+        ST_Intersects(
+          ST_Transform(partners.operating_area, 3857),
+          ST_Transform(
+            ST_SetSRID(ST_MakePoint(13.3777, 52.5163), 4326),
+            3857
+          )
+        )
+      SQL
     }
 
     scope :with_flooring_materials, ->(material_ids) {
